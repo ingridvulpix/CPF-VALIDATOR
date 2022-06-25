@@ -1,10 +1,11 @@
 from tkinter import *
-from tkinter import messagebox
+import tkinter as tk
 
 
 class Interface:
     def __init__(self, root):
         self.root = root
+        self.message =''''''
         self.create_canvas()
     
     def create_canvas(self):
@@ -14,20 +15,28 @@ class Interface:
         self.create_text_box()
     
     def extract_data(self):
-        self.data = self.text_box.get('1.0', 'end')
-        print(self.data)
+        self.data_cpf = (self.text_cpf.get('1.0', 'end')).strip()
+        self.data_dv = (self.text_dv.get('1.0', 'end')).strip()
+        data = [self.data_cpf,self.data_dv]
     
     def create_text_box(self):
-        self.message =''''''
-
-        self.text_box = Text(
+        
+        self.text_cpf = Text(
             self.root,
             height=1,
-            width=20,
+            width=9,
             wrap='word'
         )
-        self.text_box.pack(expand=True)
-        self.text_box.insert('end', self.message)
+        self.text_dv = Text(
+            self.root,
+            height=1,
+            width=2,
+            wrap='word'
+        )
+        self.text_cpf.pack(side=tk.LEFT, expand=TRUE)
+        self.text_dv.pack(side=tk.LEFT, expand=TRUE)
+        self.text_cpf.insert('end', self.message)
+        self.text_dv.insert('end', self.message)
         self.create_button()
 
     def create_button (self):
@@ -35,8 +44,12 @@ class Interface:
         self.root,
         text='Validate CPF',
         command= self.extract_data
-    ).pack(expand=True)
+    ).pack(expand=TRUE)
         self.inside()
+
+    def generate_valid_cpf (self):
+        #call the other class to get valid cpf
+        self.message = '''757.331.783-29'''
 
     def inside (self):
         self.root.mainloop()
