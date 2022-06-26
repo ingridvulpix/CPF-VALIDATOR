@@ -2,7 +2,10 @@ from tkinter import *
 import tkinter as tk
 import sys
 from operator import mul
+from turtle import onclick
 
+global end_run
+end_run = False
 class Legal_number:
     def __init__(self,cpf:str, dv:int):
         self.cpf = cpf
@@ -38,6 +41,8 @@ class Interface(Legal_number):
         self.root.title('APX3_PIG')
         self.root.geometry('500x150')
         self.root.config(bg = 'gray')
+        self.frame = Frame(self.root)
+        self.frame.pack()
         self.create_text_box()
     
     def extract_data(self):
@@ -45,17 +50,20 @@ class Interface(Legal_number):
         self.dv = int((self.text_dv.get('1.0', 'end')).strip())
         print(self.cpf)
         self.validation_output()
+        end_run = True
+        self.create_button(end_run)
+        
     
     def create_text_box(self):
         
         self.text_cpf = Text(
-            self.root,
+            self.frame,
             height=1,
             width=13,
             wrap='word'
         )
         self.text_dv = Text(
-            self.root,
+            self.frame,
             height=1,
             width=2,
             wrap='word'
@@ -64,26 +72,45 @@ class Interface(Legal_number):
         self.text_dv.pack(padx=5, pady=10,side='left')
         self.text_cpf.insert('end', self.message)
         self.text_dv.insert('end', self.message)
-        self.create_button()
+        self.create_button(end_run)
 
-    def create_button (self):
-        self.button = Button(
-        self.root,
-        text='Validate CPF',
-        command= self.extract_data
-    ).pack(padx=5, pady=15,side='left')
+    def create_button (self, end_run):
+        if end_run == True:
+            self.refresh_button = Button(
+            self.frame,
+            text='Refresh',
+            command= self.clear
+        ).pack(padx=5, pady=15,side='left')
+        else:
+            self.button = Button(
+            self.frame,
+            text='Validate CPF',
+            command= self.extract_data
+        ).pack(padx=5, pady=15,side='left')
 
-    def validation_output(self): #FIXME reset output
+            
+
+    def validation_output(self):
         valid = self.areValidDigits()
         text = 'Valid CPF'if valid == True else 'Invalid CPF'
         bg_color = '#bef9e2' if valid == True else '#ff5555'
-        self.output_text = Text(self.root, height=1,width=11, bg=bg_color)
+        self.output_text = Text(self.frame, height=1,width=11, bg=bg_color)
         self.output_text.insert('end',text)
         self.output_text["state"] = DISABLED
         self.output_text.pack(padx=10, pady=15, side='left')
 
+
+    def clear(self):
+        self.frame.destroy()
+        self.__init__(self.root)
+
+        
+def quit():
+    end_run = True
+
+
 if __name__== '__main__':
 
-    ws = Tk()
-    user_cpf = Interface(ws)
-    ws.mainloop()
+        ws = Tk()
+        user_cpf = Interface(ws)
+        ws.mainloop()
