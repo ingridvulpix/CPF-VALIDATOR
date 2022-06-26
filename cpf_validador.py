@@ -53,7 +53,7 @@ class Interface(Legal_number):
     
     def create_text_box(self):
         var = StringVar()
-        self.label = Label( self.frame, textvariable=var, relief=RAISED, font=("Ubuntu",8))
+        self.label = Label( self.frame, textvariable=var, relief=RAISED, font=("Ubuntu",12))
         var.set("Please, insert the first 9 digits of your CPF in the first box,\n \
         and then insert last 2 digits in the second box")
         self.label.pack()
@@ -82,7 +82,7 @@ class Interface(Legal_number):
             text='Validate CPF',
             command= self.extract_data
         )
-            # self.button.pack(padx=5, pady=15,side='left')
+            self.button.pack(padx=5, pady=15,side='left')
 
             # self.generate_button = Button(
             # self.frame,
