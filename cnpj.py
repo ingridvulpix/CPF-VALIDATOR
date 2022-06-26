@@ -8,7 +8,7 @@ class Cnpj:
         self.dv = dv
         self.cnpj_aux = [5,4,3,2,9,8,7,6,5,4,3,2]
         self.cnpj_aux_2 = [6,5,4,3,2,9,8,7,6,5,4,3,2]
-        #self.getDigits()
+        self.getDigits()
     
     def getDigits (self):
         return list(map(int,filter(lambda x:x.isdecimal(),self.cnpj )))
