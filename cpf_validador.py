@@ -49,7 +49,7 @@ class Interface(Legal_number):
         self.dv = int((self.text_dv.get('1.0', 'end')).strip())
         print(self.cpf)
         self.validation_output()
-        self.refresh_button()
+        self.reset_btn()
         
     
     def create_text_box(self):
@@ -79,7 +79,7 @@ class Interface(Legal_number):
             command= self.extract_data
         ).pack(padx=5, pady=15,side='left')
 
-    def refresh_button(self):
+    def reset_btn(self):
         self.refresh_button = Button(self.frame, text='Refresh', command= self.clear).pack(padx=5, pady=15,side='left')
 
     def validation_output(self):
