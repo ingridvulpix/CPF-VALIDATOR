@@ -52,7 +52,12 @@ class Interface(Legal_number):
         
     
     def create_text_box(self):
-        
+        var = StringVar()
+        self.label = Label( self.frame, textvariable=var, relief=RAISED, font=("Ubuntu",8))
+        var.set("Please, insert the first 9 digits of your CPF in the first box,\n \
+        and then insert last 2 digits in the second box")
+        self.label.pack()
+
         self.text_cpf = Text(
             self.frame,
             height=1,
@@ -77,8 +82,13 @@ class Interface(Legal_number):
             text='Validate CPF',
             command= self.extract_data
         )
-            self.button.pack(padx=5, pady=15,side='left')
+            # self.button.pack(padx=5, pady=15,side='left')
 
+            # self.generate_button = Button(
+            # self.frame,
+            # text='Generate CPF',
+            # command= self.extract_data
+            # )
     def reset_btn(self):
         self.button.config(state = DISABLED)
         self.refresh_button = Button(self.frame, text='Refresh', command= self.clear).pack(padx=5, pady=15,side='left')
