@@ -22,9 +22,9 @@ class Legal_number:
         dv2 = self.dotProd(cpf1,self.cpf_aux)
         result = dv2 % 11
         dv2 = 0 if result <= 1 else 11 - result
-        self.cpf_aux = list(range(11,1,-1))
+        self.cpf_aux_2 = list(range(11,1,-1))
         cpf1.append(dv2)
-        dv1 = self.dotProd(cpf1,self.cpf_aux)
+        dv1 = self.dotProd(cpf1,self.cpf_aux_2)
         result = dv1 % 11
         dv1 = 0 if result <= 1 else 11 - result
         return (dv2*10 + dv1 == self.dv)
@@ -47,7 +47,6 @@ class Interface(Legal_number):
     def extract_data(self):
         self.cpf = (self.text_cpf.get('1.0', 'end')).strip()
         self.dv = int((self.text_dv.get('1.0', 'end')).strip())
-        print(self.cpf)
         self.validation_output()
         self.reset_btn()
         
@@ -77,9 +76,11 @@ class Interface(Legal_number):
             self.frame,
             text='Validate CPF',
             command= self.extract_data
-        ).pack(padx=5, pady=15,side='left')
+        )
+            self.button.pack(padx=5, pady=15,side='left')
 
     def reset_btn(self):
+        self.button.config(state = DISABLED)
         self.refresh_button = Button(self.frame, text='Refresh', command= self.clear).pack(padx=5, pady=15,side='left')
 
     def validation_output(self):
