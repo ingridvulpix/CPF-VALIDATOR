@@ -19,13 +19,13 @@ class Cpf:
     
     def generate_cpf(self):
         self.cpf = list(map(lambda x:str(random.randint(0,9)),range(9)))
-        self.areValidDigits(True)
+        self.areValidDigitsCpf(True)
         output_dv = str(self.dv)
         output_dv = '0'+output_dv[:] if len(output_dv) == 1 else output_dv #add leading 0 if dv2=0
         valid_cpf = ("".join(map(str,self.cpf)))+'-'+(output_dv)
         return valid_cpf
 
-    def areValidDigits (self,generate:bool):
+    def areValidDigitsCpf (self,generate_random:bool):
         cpf1 = self.getDigits()
         dv2 = self.dotProd(cpf1,self.cpf_aux)
         result = dv2 % 11
@@ -34,5 +34,5 @@ class Cpf:
         dv1 = self.dotProd(cpf1,self.cpf_aux_2)
         result = dv1 % 11
         dv1 = 0 if result <= 1 else 11 - result
-        self.dv = dv2*10 + dv1 if generate == True else self.dv
+        self.dv = dv2*10 + dv1 if generate_random == True else self.dv
         return (dv2*10 + dv1 == self.dv)
