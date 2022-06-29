@@ -56,7 +56,6 @@ class Interface(Cpf):
         self.generate_output.pack(padx=10, pady=15, side='left')
         self.reset_btn()
 
-
     def reset_btn(self):
         self.button.config(state = DISABLED)
         self.generate_bttn.config(state = DISABLED)
