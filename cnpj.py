@@ -25,7 +25,7 @@ class Cnpj:
         valid_cnpj = ("".join(map(str,self.cnpj)))+'-'+(output_dv)
         return valid_cnpj
 
-    def areValidDigitsCnpj(self, generate_random:bool):
+    def areValidDigitsCnpj(self, generate_random:bool):#FIXME validate cnpj properly
         cnpj1 = self.getDigits()
         dv2 = self.dotProd(cnpj1,self.cnpj_aux)
         result = dv2 % 11
